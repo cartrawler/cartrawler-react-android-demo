@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">React Native Android Activity Demo</string>
+    <string name="go_back">Go back to React Native Screen</string>
+    <string name="call_javascript_from_java">Call JavaScript from Java</string>
+    <string name="ct_flow_label">CT Flow Activity</string>
+</resources>

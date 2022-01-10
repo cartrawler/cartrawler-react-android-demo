@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#007585</color>
+    <color name="colorPrimaryDark">#004958</color>
+    <color name="colorAccent">#EB6401</color>
+
+    <color name="CT_ColorPrimary">#007585</color>
+    <color name="CT_ColorSecondary">#004958</color>
+    <color name="CT_ColorAccent">#EB6401</color>
+
+    <color name="genericPrimary">#007585</color>
+    <color name="genericDarkPrimary">#004852</color>
+    <color name="genericAccent">#EB6401</color>
+    <color name="genericPrimaryLight">#37A4B8</color>
+
+    <color name="genericLightPrimary">#FFFFFF</color>
+    <color name="genericLightDarkPrimary">#FFFFFF</color>
+    <color name="genericLightAccent">#EB6401</color>
+
+</resources>

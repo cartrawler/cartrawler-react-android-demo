@@ -1,0 +1,32 @@
+<resources>
+    <style name="AppTheme" parent="CTDayNightTheme">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+
+    <item name="colorPrimary">@color/genericPrimary</item>
+    <item name="colorOnPrimary">@color/ct_white</item>
+    <item name="colorPrimaryVariant">@color/genericDarkPrimary</item>
+    <item name="android:statusBarColor">@color/genericDarkPrimary</item>
+    <item name="colorSecondary">@color/genericAccent</item>
+    <item name="colorOnSecondary">@color/ct_white</item>
+    <item name="colorSecondaryVariant">#007585</item>
+
+    </style>
+
+    <style name="GenericLightTheme" parent="CTDayNightTheme">
+        <item name="colorPrimary">@color/genericLightPrimary</item>
+        <item name="colorOnPrimary">@color/ct_black</item>
+        <item name="colorPrimaryVariant">@color/genericLightDarkPrimary</item>
+        <item name="android:statusBarColor">@color/ct_black</item>
+        <item name="colorSecondary">@color/genericLightAccent</item>
+        <item name="colorOnSecondary">@color/ct_white</item>
+        <item name="colorSecondaryVariant">@color/genericPrimary</item>
+        <item name="ctLoyaltyPrimaryColor">@color/ct_white</item>
+        <item name="ctLoyaltyPrimaryTextColor">@color/ct_white</item>
+        <item name="ctLoyaltySecondaryColor">@color/cardview_dark_background</item>
+        <item name="ctLoyaltySecondaryTextColor">@color/ct_white</item>
+        <item name="CTLoyaltyTheme">dark</item>
+        <item name="ctProgressBarColor">@color/genericLightAccent</item>
+        <item name="ctIllustrationColor">@color/genericPrimaryLight</item>
+    </style>
+</resources>
