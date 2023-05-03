@@ -2,27 +2,41 @@ package com.reactdemo
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatDelegate
-import cartrawler.core.engine.CartrawlerSDK
-import cartrawler.core.engine.CartrawlerSDKPassenger
-import java.util.*
+import cartrawler.external.CartrawlerSDK
+import cartrawler.external.model.CTSdkData
+import cartrawler.external.model.CTSdkPassenger
+import cartrawler.external.type.CTSdkEnvironment
+import cartrawler.external.type.CTSdkFlow
+import java.time.LocalDateTime
 
 object CTSdkInjector {
 
     const val REQUEST_CODE_STANDALONE = 123
     const val REQUEST_CODE_IN_PATH = 456
+    private const val IMPLEMENTATION_ID = "89e36078-362c-4f52-9a65-ec9cea9b8482"
+    private const val CLIENT_ID = "685051"
+
 
     @JvmStatic
     fun startStandalone(activity: Activity) {
+        val partnerImplementationID = IMPLEMENTATION_ID  // your-implementation-id-here
         val environment = environment()
 
-        CartrawlerSDK.Builder()
-            .setRentalStandAloneClientId("685051")
-            .setEnvironment(environment)
-            .setFlightNumberRequired(false)
-            .setLogging(BuildConfig.DEBUG)
-            .setTheme(R.style.AppTheme)
-            .setDarkModeConfig(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            .startRentalStandalone(activity, REQUEST_CODE_STANDALONE)
+        CartrawlerSDK.init(partnerImplementationID, environment)
+
+        val ctSdkData = CTSdkData.Builder(clientId = CLIENT_ID) //your clientID here
+            .flightNumberRequired(false)
+            .logging(BuildConfig.DEBUG)
+            .theme(R.style.AppTheme)
+            .darkModeConfig(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            .build()
+
+        CartrawlerSDK.start(
+            activity = activity,
+            requestCode = REQUEST_CODE_STANDALONE,
+            ctSdkData = ctSdkData,
+            flow = CTSdkFlow.Standalone()
+        )
     }
 
     @JvmStatic
@@ -32,30 +46,35 @@ object CTSdkInjector {
         val pickUpDate = pickUpDate()
         val dropOffDate = dropOffDate()
 
-        CartrawlerSDK.Builder()
-            .setRentalInPathClientId("685051")
-            .setEnvironment(environment)
-            .setFlightNumberRequired(true)
-            .setPassenger(passenger)
-            .setAccountId("123")
-            .setLogging(true)
-            .setPickupTime(pickUpDate)
-            .setPickupLocation("DUB")
-            .setDropOffLocationId(11)
-            .setDropOffTime(dropOffDate)
-            .setTheme(R.style.AppTheme)
-            .startRentalInPath(activity, REQUEST_CODE_IN_PATH)
+        CartrawlerSDK.init(IMPLEMENTATION_ID, environment)
+
+        val ctSdkData = CTSdkData.Builder(clientId = CLIENT_ID)
+            .flightNumberRequired(true)
+            .passenger(passenger)
+            .logging(true)
+            .pickupDateTime(pickUpDate)
+            .pickupLocationIATA("DUB")
+            .dropOffLocationId(11)
+            .dropOffDateTime(dropOffDate)
+            .theme(R.style.AppTheme)
+            .build()
+
+        CartrawlerSDK.start(
+            activity = activity,
+            requestCode = REQUEST_CODE_IN_PATH,
+            ctSdkData = ctSdkData,
+            flow = CTSdkFlow.InPath()
+        )
     }
 
-
-    private fun environment(): String {
+    private fun environment(): CTSdkEnvironment {
         return if (BuildConfig.DEBUG)
-            CartrawlerSDK.Environment.STAGING
-        else CartrawlerSDK.Environment.PRODUCTION
+            CTSdkEnvironment.DEVELOPMENT
+        else CTSdkEnvironment.PRODUCTION
     }
 
-    private fun passenger(): CartrawlerSDKPassenger{
-        return CartrawlerSDKPassenger(
+    private fun passenger(): CTSdkPassenger{
+        return CTSdkPassenger(
             firstName = "John",
             lastName = "Smith",
             email = "john@example.com",
@@ -70,24 +89,23 @@ object CTSdkInjector {
             membershipId = "123456")
     }
 
-    private fun pickUpDate(): GregorianCalendar {
-        val pickupDateTime = GregorianCalendar.getInstance() as GregorianCalendar
-        val defaultMonth = pickupDateTime.get(Calendar.MONTH) + 1
-        val defaultDay = pickupDateTime.get(Calendar.DAY_OF_MONTH) + 1
+    private fun pickUpDate(): LocalDateTime {
+        val pickupDateTime = LocalDateTime.now()
+        val defaultMonth = pickupDateTime.month.value + 1
+        val defaultDay = pickupDateTime.dayOfMonth + 1
 
-        pickupDateTime.set(GregorianCalendar.MONTH, defaultMonth)
-        pickupDateTime.set(GregorianCalendar.DAY_OF_MONTH, defaultDay)
         return pickupDateTime
+            .withMonth(defaultMonth)
+            .withDayOfMonth(defaultDay)
     }
 
-    private fun dropOffDate(): GregorianCalendar {
-        val dropOfDateTime = GregorianCalendar.getInstance() as GregorianCalendar
-        val defaultMonth = dropOfDateTime.get(Calendar.MONTH) + 1
-        val defaultDay = dropOfDateTime.get(Calendar.DAY_OF_MONTH) + 1
+    private fun dropOffDate(): LocalDateTime {
+        val dropOfDateTime = LocalDateTime.now()
+        val defaultMonth = dropOfDateTime.month.value + 1
+        val defaultDay = dropOfDateTime.dayOfMonth + 5
 
-        dropOfDateTime.set(GregorianCalendar.MONTH, defaultMonth)
-        dropOfDateTime.set(GregorianCalendar.DAY_OF_MONTH, defaultDay)
-        dropOfDateTime.add(GregorianCalendar.DAY_OF_MONTH, 5)
         return dropOfDateTime
+            .withMonth(defaultMonth)
+            .withDayOfMonth(defaultDay)
     }
 }
