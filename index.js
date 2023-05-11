@@ -24,22 +24,14 @@ export default class CTSDKDemoComponent extends Component {
         <View style={styles.buttonContainer}>
           <Button color="#004958" style={styles.btn}
             onPress={() => {
-              if (Platform.OS === 'ios') {
-                ctSDKStarterModule.startBookingFlow(false);
-              } else {
-                ctSDKStarterModule.startBookingFlow(false)
-              }
+              ctSDKStarterModule.startBookingFlow(false);
             }
             }
             title='Start Standalone flow'
           />
           <Button color="#004958" style={styles.btn}
             onPress={() => {
-              if (Platform.OS === 'ios') {
-                ctSDKStarterModule.startBookingFlow(true);
-              } else {
-                ctSDKStarterModule.startBookingFlow(true)
-              }
+              ctSDKStarterModule.startBookingFlow(true)
             }
             }
             title='Start InPath flow'
