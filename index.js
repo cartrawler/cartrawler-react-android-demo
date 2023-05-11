@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('ReactDemo', () => CTSDKDemoComponent);
+AppRegistry.registerComponent('CTSDKDemoComponent', () => CTSDKDemoComponent);
 
 if (Platform.OS != 'ios') {
   const eventEmitter = new NativeEventEmitter(eventEmitterModule);
