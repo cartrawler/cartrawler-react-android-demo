@@ -5,4 +5,6 @@
 
 @property (nonatomic, strong) UIWindow *window;
 
+- (void)launchBookingFlow;
+
 @end
