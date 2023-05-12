@@ -1,5 +1,5 @@
 
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 
 import {
   AppRegistry,
@@ -24,24 +24,16 @@ export default class CTSDKDemoComponent extends Component {
         <View style={styles.buttonContainer}>
           <Button color="#004958" style={styles.btn}
             onPress={() => {
-                if(Platform.OS === 'ios'){
-
-                }else{
-                  ctSDKStarterModule.startBookingFlow(false)
-                }
-              }
+              ctSDKStarterModule.startBookingFlow(false);
+            }
             }
             title='Start Standalone flow'
           />
           <Button color="#004958" style={styles.btn}
             onPress={() => {
-              if(Platform.OS === 'ios'){
-
-              }else{
-                ctSDKStarterModule.startBookingFlow(true)
-              }
-            } 
-          }
+              ctSDKStarterModule.startBookingFlow(true)
+            }
+            }
             title='Start InPath flow'
           />
         </View>
@@ -69,15 +61,17 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 
-  btn:{
+  btn: {
     marginTop: 10,
     color: "#FFFFFF"
   }
 });
 
-AppRegistry.registerComponent('CTSDKDemoComponent', () => CTSDKDemoComponent);
+AppRegistry.registerComponent('ReactDemo', () => CTSDKDemoComponent);
 
-const eventEmitter = new NativeEventEmitter(eventEmitterModule);
-eventEmitter.addListener("BookingEvent", (params) => {
-  alert("Hello from React Native side, the booking details were received"+ "\n\n" + params);
-});
+if (Platform.OS != 'ios') {
+  const eventEmitter = new NativeEventEmitter(eventEmitterModule);
+  eventEmitter.addListener("BookingEvent", (params) => {
+    alert("Hello from React Native side, the booking details were received" + "\n\n" + params);
+  });
+}

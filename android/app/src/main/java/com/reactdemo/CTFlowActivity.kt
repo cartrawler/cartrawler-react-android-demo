@@ -6,7 +6,7 @@ import androidx.annotation.CallSuper
 import android.os.Bundle
 import android.view.View
 import cartrawler.core.data.external.ReservationDetails
-import cartrawler.core.engine.CartrawlerSDK
+import cartrawler.external.CartrawlerSDK
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.reactdemo.CTSdkInjector.REQUEST_CODE_IN_PATH
