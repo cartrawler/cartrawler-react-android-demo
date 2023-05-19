@@ -9,10 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RCT_EXTERN_MODULE(EventEmitterModule, RCTEventEmitter)
+@interface EventEmitterModule : RCTEventEmitter <RCTBridgeModule>
 
-RCT_EXTERN_METHOD(supportedEvents)
+- (void)sendEventName:(NSString *)eventName body:(id)body;
+- (bool)hasListeners;
 
 @end
+
 
 NS_ASSUME_NONNULL_END

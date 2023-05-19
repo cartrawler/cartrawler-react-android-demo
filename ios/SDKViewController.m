@@ -38,10 +38,9 @@
 }
 
 - (void)didReceiveReservationDetails:(CTReservationDetails *)reservationDetails {
-  
-  EventEmitterModule *eventModule = [[EventEmitterModule alloc] init];
-  [eventModule sendEventWithName:@"BookingEvent" body:@"hi from iOS"];
-  
+  EventEmitterModule *eventModule = [EventEmitterModule allocWithZone:nil];
+  NSString *bookingIDString = [NSString stringWithFormat:@"BookingID: %@", reservationDetails.resId];
+  [eventModule sendEventName:@"BookingEvent" body:bookingIDString];
 }
 
 @end
