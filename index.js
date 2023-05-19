@@ -72,10 +72,4 @@ const eventEmitter = new NativeEventEmitter(eventEmitterModule);
     alert("Hello from React Native side, the booking details were received" + "\n\n" + params);
   });
 
-
-if (Platform.OS != 'ios') {
-  AppRegistry.registerComponent('CTSDKDemoComponent', () => CTSDKDemoComponent);
-  
-} else {
-  AppRegistry.registerComponent('ReactDemo', () => CTSDKDemoComponent);
-}
+AppRegistry.registerComponent('CTSDKDemoComponent', () => CTSDKDemoComponent);
