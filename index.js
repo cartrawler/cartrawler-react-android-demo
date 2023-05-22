@@ -67,11 +67,9 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('ReactDemo', () => CTSDKDemoComponent);
-
-if (Platform.OS != 'ios') {
-  const eventEmitter = new NativeEventEmitter(eventEmitterModule);
+const eventEmitter = new NativeEventEmitter(eventEmitterModule);
   eventEmitter.addListener("BookingEvent", (params) => {
     alert("Hello from React Native side, the booking details were received" + "\n\n" + params);
   });
-}
+
+AppRegistry.registerComponent('CTSDKDemoComponent', () => CTSDKDemoComponent);

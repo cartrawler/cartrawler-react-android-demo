@@ -40,12 +40,6 @@ static void InitializeFlipper(UIApplication *application) {
                                             initialProperties:nil];
     
   [CarTrawlerSDK.sharedInstance initialiseSDKWithStyle:nil customParameters:nil production:NO];
-  
-  if (@available(iOS 13.0, *)) {
-      rootView.backgroundColor = [UIColor redColor];
-  } else {
-      rootView.backgroundColor = [UIColor whiteColor];
-  }
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [SDKViewController new];
